@@ -39,6 +39,8 @@ Transformers:
 * lale.lib.lale. `Map`_
 * lale.lib.lale. `Join`_
 * lale.lib.lale. `Scan`_
+* lale.lib.lale. `OutlierRemover`_
+* lale.lib.lale. `OutlierRemoverHO`_
 
 Estimators and transformers:
 
@@ -65,6 +67,8 @@ Estimators and transformers:
 .. _`Both`: lale.lib.lale.both.html
 .. _`IdentityWrapper`: lale.lib.lale.identity_wrapper.html
 .. _`Observing`: lale.lib.lale.observing.html
+.. _`OutlierRemover`: lale.lib.lale.outlier_remover.html
+.. _`OutlierRemoverHO`: lale.lib.lale.outlier_remover_ho.html
 """
 
 #estimators
@@ -92,6 +96,8 @@ from .group_by import GroupBy
 from .map import Map
 from .join import Join
 from .scan import Scan
+from .outlier_remover import OutlierRemover
+from .outlier_remover_ho import OutlierRemoverHO
 
 #estimators and transformers
 from .both import Both

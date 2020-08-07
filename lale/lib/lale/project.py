@@ -20,8 +20,8 @@ import sklearn.compose
 import pandas as pd
 
 class ProjectImpl:
-    def __init__(self, columns=None):
-        self._hyperparams = { 'columns': columns }
+    def __init__(self, columns=None, dropColumns=None):
+        self._hyperparams = { 'columns': columns, 'dropColumns': dropColumns}
 
     def fit(self, X, y=None):
         columns = self._hyperparams['columns']
@@ -135,6 +135,7 @@ by using a JSON subschema_ check.
 .. _ColumnTransformer: https://scikit-learn.org/stable/modules/generated/sklearn.compose.ColumnTransformer.html
 .. _subschema: https://github.com/IBM/jsonsubschema""",
               'anyOf': [
+                 { 'enum':[None] },
                  { 'type': 'integer',
                    'description': 'One column by index.'},
                  { 'type': 'array', 'items': {'type': 'integer'},
@@ -146,7 +147,30 @@ by using a JSON subschema_ check.
                  { 'type': 'array', 'items': {'type': 'boolean'},
                    'description': 'Boolean mask.'},
                  { 'type': 'object',
-                   'description': 'Keep columns whose schema is a subschema of this JSON schema.'}]}}}]}
+                   'description': 'Keep columns whose schema is a subschema of this JSON schema.'}]},
+          'dropColumns': {
+              'description': """The subset of columns to remove.
+
+The supported column specification formats include those of
+scikit-learn's ColumnTra`nsformer_, and in addition, filtering
+by using a JSON subschema_ check.
+
+.. _ColumnTransformer: https://scikit-learn.org/stable/modules/generated/sklearn.compose.ColumnTransformer.html
+.. _subschema: https://github.com/IBM/jsonsubschema""",
+              'anyOf': [
+                 { 'enum':[None] },
+                 { 'type': 'integer',
+                   'description': 'One column by index.'},
+                 { 'type': 'array', 'items': {'type': 'integer'},
+                   'description': 'Multiple columns by index.'},
+                 { 'type': 'string',
+                   'description': 'One Dataframe column by name.'},
+                 { 'type': 'array', 'items': {'type': 'string'},
+                   'description': 'Multiple Dataframe columns by names.'},
+                 { 'type': 'array', 'items': {'type': 'boolean'},
+                   'description': 'Boolean mask.'},
+                 { 'type': 'object',
+                   'description': 'Remove columns whose schema is a subschema of this JSON schema.'}]}}}]}
 
 _input_fit_schema = {
   'type': 'object',

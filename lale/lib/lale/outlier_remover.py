@@ -16,13 +16,15 @@ import lale.docstrings
 import lale.operators
 
 class OutlierRemoverImpl:
-    def __init__(self, algorithm='isolation_forest'):
-        self._hyperparams = { 'algorithm' : algorithm }
+    def __init__(self, operator=None, algorithm='isolation_forest'):
+        self._hyperparams = { 'operator':operator, 'algorithm' : algorithm }
 
     def fit(self, X, y=None):
+        #Remove outliers from the data and then fit the operator with the modified dataset.
         raise NotImplementedError()
     
     def transform(self, X):
+        #Just use transform of the operator as is.
         raise NotImplementedError()
 
 _hyperparams_schema = {
@@ -32,6 +34,9 @@ _hyperparams_schema = {
         'additionalProperties': False,
         'relevantToOptimizer': [],
         'properties': {
+            'operator': {
+                'description':'A pipeline or an individual operator that would be fit after removing outliers from the data.',
+                'laleType': 'operator'},
             'algorithm': {
                 'description': 'Underlying outlier detection technique used.',
                 'enum':['isolation_forest'],

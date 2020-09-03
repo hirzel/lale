@@ -68,6 +68,18 @@ def count(group: Expr) -> Expr:
     call = ast.Call(func=ast.Name(id='count'), args=[group._expr], keywords=[])
     return Expr(call)
 
+def mean(group: Expr) -> Expr:
+    call = ast.Call(func=ast.Name(id='mean'), args=[group._expr], keywords=[])
+    return Expr(call)
+
+def variance(group: Expr) -> Expr:
+    call = ast.Call(func=ast.Name(id='variance'), args=[group._expr], keywords=[])
+    return Expr(call)
+
+def distinct_count(group: Expr) -> Expr:
+    call = ast.Call(func=ast.Name(id='distinct_count'), args=[group._expr], keywords=[])
+    return Expr(call)
+
 def day_of_month(subject: Expr, fmt:Optional[str]=None) -> Expr:
     args: List[Union[ast.Expr, ast.Str]]
     if fmt is None:
@@ -84,6 +96,15 @@ def day_of_week(subject: Expr, fmt:Optional[str]=None) -> Expr:
     else:
         args = [subject._expr, ast.Str(s=fmt)]
     call = ast.Call(func=ast.Name(id='day_of_week'), args=args, keywords=[])
+    return Expr(call)
+
+def day_of_year(subject: Expr, fmt:Optional[str]=None) -> Expr:
+    args: List[Union[ast.Expr, ast.Str]]
+    if fmt is None:
+        args = [subject._expr]
+    else:
+        args = [subject._expr, ast.Str(s=fmt)]
+    call = ast.Call(func=ast.Name(id='day_of_year'), args=args, keywords=[])
     return Expr(call)
 
 def hour(subject: Expr, fmt:Optional[str]=None) -> Expr:
@@ -108,6 +129,10 @@ def item(group: Expr, value : Union[int, str]) -> Expr:
 
 def max(group: Expr) -> Expr:
     call = ast.Call(func=ast.Name(id='max'), args=[group._expr], keywords=[])
+    return Expr(call)
+
+def min(group: Expr) -> Expr:
+    call = ast.Call(func=ast.Name(id='min'), args=[group._expr], keywords=[])
     return Expr(call)
 
 def minute(subject: Expr, fmt:Optional[str]=None) -> Expr:
